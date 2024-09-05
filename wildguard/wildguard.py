@@ -87,9 +87,7 @@ class SafetyClassifierBase(ABC):
         ), "Missing required classifier input fields."
         batch_size = len(items) if self.batch_size == -1 else self.batch_size
         results: Sequence[dict[str, Any]] = []
-        for batch_start in tqdm(
-            range(0, len(items), batch_size), total=len(items) // batch_size
-        ):
+        for batch_start in range(0, len(items), batch_size):
             batch = items[batch_start : batch_start + batch_size]
             batch_results = self._classify_batch(batch)
             results += [r.asdict(keep_none=True) for r in batch_results]
