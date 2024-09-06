@@ -29,8 +29,8 @@ def load_tokenizer(name: str, use_fast: bool):
 
 
 def load_hf_model(name: str, device: str):
-    return AutoModelForCausalLM.from_pretrained(name).to(device)
-
+    return AutoModelForCausalLM.from_pretrained(name,device_map="auto")
+#AutoModelForCausalLM.from_pretrained(name).to(device)
 
 def inference_with_vllm(
     prompts: list[str],
